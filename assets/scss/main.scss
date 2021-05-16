@@ -1,0 +1,51 @@
+@import "reset";
+@font-face {
+    font-family: 'UTM';
+    src: url('../fonts/UTMFlavour.woff2') format('woff2'),
+        url('../fonts/UTMFlavour.woff') format('woff'),
+        url('../fonts/UTMFlavour.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SVN-Sarifa';
+    src: url('../fonts/SVN-Sarifa.woff2') format('woff2'),
+        url('../fonts/SVN-Sarifa.woff') format('woff'),
+        url('../fonts/SVN-Sarifa.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'iCielBC Burford Rustic';
+    src: url('../fonts/iCielBCBurfordRustic-Light.woff2') format('woff2'),
+        url('../fonts/iCielBCBurfordRustic-Light.woff') format('woff'),
+        url('../fonts/iCielBCBurfordRustic-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+img{
+    display: block;
+    width: 100%;
+}
+
+$utm: UTM;
+$svn: SVN-Sarifa;
+$ibr: iCielBC Burford Rustic;
+*{
+    box-sizing: border-box;
+}
+.utm{
+    font-family: $utm;
+}
+.svn{
+    font-family: $svn;
+}
+.ibr{
+    font-family: $ibr;
+}

@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'UTM Flavour';
+    src: url('UTMFlavour.woff2') format('woff2'),
+        url('UTMFlavour.woff') format('woff'),
+        url('UTMFlavour.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SVN-Sarifa';
+    src: url('SVN-Sarifa.woff2') format('woff2'),
+        url('SVN-Sarifa.woff') format('woff'),
+        url('SVN-Sarifa.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'iCielBC Burford Rustic';
+    src: url('iCielBCBurfordRustic-Light.woff2') format('woff2'),
+        url('iCielBCBurfordRustic-Light.woff') format('woff'),
+        url('iCielBCBurfordRustic-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
