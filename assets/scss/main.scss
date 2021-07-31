@@ -1,4 +1,5 @@
 @import "reset";
+@import "jquery.fancybox.min.scss";
 @font-face {
     font-family: 'UTM';
     src: url('../fonts/UTMFlavour.woff2') format('woff2'),
@@ -32,20 +33,1296 @@
 img{
     display: block;
     width: 100%;
+    transition: all ease 0.5s;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
 }
 
 $utm: UTM;
-$svn: SVN-Sarifa;
-$ibr: iCielBC Burford Rustic;
-*{
-    box-sizing: border-box;
-}
 .utm{
     font-family: $utm;
 }
+$svn: SVN-Sarifa;
 .svn{
     font-family: $svn;
 }
+$ibr: iCielBC Burford Rustic;
 .ibr{
     font-family: $ibr;
+}
+$mobile-width: 767px;
+$tablet-width: 768px;
+$laptop-width: 1024px;
+$desktop-width: 1366px;
+
+@mixin mobile {
+    @media (max-width: #{$mobile-width}){
+        @content;
+    }
+}
+@mixin tablet {
+    @media (max-width:#{$laptop-width - 1px}){
+        @content;
+    }
+}
+@mixin laptop {
+    @media (max-width:#{$desktop-width - 1px}){
+        @content;
+    }
+}
+@mixin desktop {
+    @media (max-width: 1600px){
+        @content;
+    }
+}
+.desktop-w{
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+.desktop-sm{
+    width: 70%;
+    max-width: 1100px;
+    @include tablet{
+        width: 100%;
+        padding: 0 20px;
+    }
+}
+.desktop-md{
+    width: 80%;
+    max-width: 1500px;
+    @include tablet{
+        width: 100%;
+        padding: 0 20px;
+    }
+}
+#reveal{
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 1s ease-in-out;
+}
+.visible{
+    opacity: 1;
+    transform: none;
+}
+*{
+    box-sizing: border-box;
+}
+.isMobile{
+    display: none;
+    @include tablet{
+        display: block;
+    }
+}
+.isPC{
+    display: block;
+    @include tablet{
+        display: none;
+    }
+}
+body{
+    background-color: #af0303;
+    line-height: 1.5;
+    font-family: 'SVN-Sarifa';
+    font-weight: normal;
+    color: white;
+    font-size: 16px;
+}
+@mixin sizeAndColor ($size, $color){
+    color: $color;
+    font-size: $size;
+}
+@keyframes opacity{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+@keyframes balloon{
+    0%{
+        transform: translateY(10px);
+    }
+    50%{
+        transform: translateY(-10px);
+    }
+    100%{
+        transform: translateY(10px);
+    }
+
+}
+@keyframes inAndOut{
+    0%{
+        transform: scale(0.9);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(0.9);
+    }
+}
+section{
+    &.banner{
+        position: relative;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10%;
+        overflow-x: hidden;
+        @include tablet{
+            margin-bottom: 0;
+        }
+        .icon{
+            position: absolute;
+            &.icon1{
+                width: 30%;
+                top: 0;
+                left: 0;
+                @include laptop{
+                    width: 40%;
+                }
+            }
+            &.icon2{
+                top: 0;
+                right: 0;
+                width: 40%;
+            }
+            &.icon3{
+                width: 25%;
+                right: 10%;
+                bottom: 10%;
+                z-index: 1;
+            }
+            &.icon4{
+                width: 20%;
+                left: 0%;
+                bottom: 0%;
+                z-index: 1;
+                img{
+                    -webkit-animation: opacity ease infinite 3s;
+                    animation: opacity ease infinite 3s;
+                }
+            }
+        }
+        .background2{
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0;
+            width: 80%;
+        }
+        .wrap{
+            position: relative;    
+            .bg{
+                position: absolute;
+                top: 50%;
+                left: 40%;
+                transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                -o-transform: translate(-50%, -50%);
+                width: 115%;
+                z-index: -1;
+                @include laptop{
+                    width: 200%;
+                }
+                @include tablet{
+                    width: 250%;
+                }
+            }
+            .pic{
+                position: absolute;
+                top: 85%;
+                right: 0%;
+                -webkit-transform: translate(15%, -50%);
+                -ms-transform: translate(15%, -50%);
+                transform: translate(15%, -50%);
+                width: 70%;
+                z-index: 2;
+                transition: all ease-in-out 0.3s;
+                &:hover{
+                    width: 72%;
+                    transition: all ease-in-out 0.3s;
+                }
+            }
+            .text{
+                width: 70%;
+                @include tablet{
+                    width: 85%;
+                }
+                .text-title{
+                    @include sizeAndColor(3.75em, #d22e1e);
+                    line-height: 1;
+                    margin: 0;
+                    @include desktop{
+                        font-size: 3em;
+                    }
+                    @include laptop{
+                        padding-right: 10px;
+                    }
+                    @include tablet{
+                        font-size: 1.6em;
+                    }
+                }
+                .text-content{
+                    @include sizeAndColor(1.25em,black );
+                    padding-right: 20%;
+                    margin-top: 3%;
+                    @include tablet{
+                        font-size: 1em;
+                    }
+                }
+            }
+        }
+    }
+    &.section1{
+        position: relative;
+        .wrap{
+            position: relative;
+        }
+        .title{
+            @include sizeAndColor(2.625em, #ffe306);
+            line-height: 1;
+            @include desktop{
+                font-size: 2.5em;
+            }
+            @include tablet{
+                font-size: 1.8em;
+                text-align: center;
+                margin-bottom: 50px;
+            }
+        }
+        .bg{
+            position: absolute;
+            z-index: -1;
+            top: 50%;
+            width: 100%;
+            transform: translate(0, -50%);
+            -webkit-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+        }
+        .wishList{
+            position: relative;
+            .list-anchor{
+                position: absolute;
+                top: 50%;
+            }
+            .list{
+                opacity: 1;
+                display: flex;
+                flex-wrap: wrap;
+                -ms-flex-wrap: wrap;
+                -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+                overflow: hidden;
+                padding: 4% 5% 4%;
+                @include mobile{
+                    overflow: unset;
+                }
+                .item{
+                    opacity: 1;
+                    width: 25%;
+                    animation: balloon 3s infinite ease 0.5s;
+                    transition: all ease 0.3s;
+                    @include tablet{
+                        width: 50%;
+                    }
+                    &:nth-child(even){
+                        padding-top: 7%;
+                        animation: balloon 3s infinite ease 0.3s;
+                    }
+                    .img{
+                        transform: scale(1.2);
+                        -ms-transform: scale(1.2);
+                        img{
+                            transition: all ease 0.5s;
+                            &:hover{
+                                transform: scale(1.1);
+                                transition: all ease 0.5s;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .content{
+            font-size: 1.25em;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            @include tablet{
+                font-size: 1em;
+            }
+            .bl{
+                width: calc(50% - 20px);
+                @include tablet{
+                    width: 100%;
+                }
+                &.left{
+                    .text{
+                        p:first-child{
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+                &.right{
+                    .text{
+                        p:first-child{
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+            }
+
+        }
+        .icon{
+            &.icon1{
+                position: absolute;
+                width: 5%;
+                right: 5%;
+                bottom: 2%;
+            }
+        }
+    }
+    &.section2{
+        position: relative;
+        padding-top: 15%;
+        overflow: hidden;
+        .item{
+            position: absolute;
+            &.item1{
+                width: 10%;
+                top: 0;
+                left: 0;
+                transform:translate(0, 40%);
+            }
+            &.item2{
+                width: 15%;
+                bottom: 0;
+                left: 0;
+                transform: translate(0%, 30%);
+                @include tablet{
+                    width: 40%;
+                }
+            }
+            &.item3{
+                width: 30%;
+                bottom: 0;
+                right: 0;
+                transform: translate(20%, 50%);
+                @include tablet{
+                    width: 90%;
+                    transform: translate(40%, 35%);
+                }
+            }
+        }
+        .desktop-sm{
+            margin-bottom: 50px;
+            .wrap{
+                h3{
+                    @include sizeAndColor(2.625em, #ffe306);
+                    @include desktop{
+                        font-size: 2.5em;
+                    }
+                    @include tablet{
+                        font-size: 1.8em;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        .desktop-md{
+            @include desktop{
+                padding-bottom: 50px;
+            }
+            .wrap{
+                .hotmom{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    .quote{
+                        width: calc(50% - 20px);
+                        margin-bottom: 50px;
+                        @include tablet{
+                            width: 100%;
+                        }
+                        &:nth-child(even){
+                            .quote-wrap{
+                                .img{
+                                    position: absolute;
+                                    width: 30%;
+                                    bottom: 0;
+                                    left: inherit !important;
+                                    right: 0;
+                                    @include desktop{
+                                        width: 35%;
+                                    }
+                                }
+                                .quote-content{
+                                    padding-left: 0;
+                                    padding-right: 30%;
+                                    .text{
+                                        &:before{
+                                            right: inherit !important;
+                                            left: 50%;
+                                            transform: translate(-120%, -80%);
+                                            @include laptop{
+                                                transform: translate(-85%, -55%);
+                                            }
+                                            @include tablet{
+                                                transform: translate(-115%, -55%);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                        .quote-wrap{
+                            background-color: #f9e1c3;
+                            border-radius: 20px;
+                            padding: 30px;
+                            position: relative;
+                            overflow: hidden;
+                            @include desktop {
+                                padding: 15px;
+                            }
+                            @include tablet{
+                                overflow:visible;
+                            }
+                            &:before{
+                                width: calc(100% - 20px);
+                                height: calc(100% - 20px);
+                                display: block;
+                                content: "";
+                                position: absolute;
+                                top: 50%;
+                                right: 50%;
+                                transform: translate(50%, -50%);
+                                border-radius: 20px;
+                                border: 3px solid #f9c253;
+                            }
+                            .img{
+                                position: absolute;
+                                width: 30%;
+                                bottom: 0;
+                                left: 0;
+                                @include desktop{
+                                    width: 35%;
+                                }
+                            }
+                            .quote-content{
+                                @include sizeAndColor( 1.375em, #9e0202 );
+                                padding-left: 30%;
+                                padding-top: 15px;
+                                height: 230px;
+                                text-align: center;
+                                @include desktop{
+                                    font-size: 1.25em;
+                                }
+                                @include tablet{
+                                    font-size: 1.125em;
+                                }
+                                @include mobile{
+                                    padding-left: 20%;
+                                }
+                                p:last-child{
+                                    margin-top: 50px;
+                                    @include mobile{
+                                        margin-top: 10px;
+                                    }
+                                }
+                                .text{
+                                    &:before{
+                                        content: "";
+                                        display: block;
+                                        position: absolute;
+                                        width: 17vh;
+                                        height: 17vh;
+                                        top: 50%;
+                                        right: 50%;
+                                        transform: translate(120%, -80%);
+                                        background: url("../images/49.png") center no-repeat;
+                                        background-size: 100%;
+                                        @include laptop{
+                                            width: 10vh;
+                                            height: 10vh;
+                                            transform: translate(85%, -55%);
+                                        }
+                                        @include tablet{
+                                            width: 15vh;
+                                            height: 15vh;
+                                            transform: translate(115%, -55%);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.section3{
+        position: relative;
+        padding-top: 80px;
+        @include mobile{
+            overflow: hidden;
+        }
+        .background1{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 750px;
+            background: #f9e1c3;
+            z-index: -1;
+            @include laptop{
+                height: 550px;
+            }
+            @include tablet{
+                height: 1550px;
+            }
+            @include mobile{
+                height: 925px;
+            }
+        }
+        .apricot{
+            position: absolute;
+            width: 25%;
+            top: 0;
+            left: 0;
+            transform: translate(0, 80%);
+            @include desktop{
+                transform: translate(0, 130%);
+            }
+            @include laptop{               
+                transform: translate(0, 165%);
+            }
+            @include mobile{
+                transform: translate(0, 210%);
+                width: 30%;
+            }
+        }
+        .desktop-md{
+            .wrap{
+                .first{
+                    .wrap{
+                        display: flex;
+                        flex-wrap: wrap;
+                        .block{
+                            &.block1{
+                                width: calc(35% - 5px);
+                                @include tablet{
+                                    width: 100%;
+                                }
+                                .isMobile{
+                                    h3{
+                                        @include sizeAndColor(1.8em,#ed1c24);
+                                        text-shadow: 0 1px 0 yellow;
+                                        text-align: center;
+                                    }
+                                    p{
+                                        @include sizeAndColor(1em, #9e0202);
+                                    }
+                                    padding-bottom: 20px;
+                                }
+                                .img{
+                                    transition: all ease 0.5s;
+                                    &:hover{
+                                        transform: scale(1.02);
+                                        transition: all ease 0.5s;
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+                            &.block2{
+                                width: calc(65% - 5px);
+                                padding-left: 5%;
+                                padding-top: 5%;
+                                @include laptop{                             
+                                    padding-left: 10%;
+                                }
+                                @include tablet{
+                                    width: 100%;
+                                    padding: 0;
+                                }
+                                .text{
+                                    &.text1{
+                                        h3{
+                                            @include sizeAndColor(2.625em, #ed1c24);
+                                            text-shadow: 0 0 0 yellow;
+                                            @include desktop{
+                                                font-size: 2.5em;
+                                            }
+                                        }
+                                        p{
+                                            @include sizeAndColor(1.25em, #9e0202);
+                                            @include desktop{
+                                                font-size: 1.125em;
+                                            }
+                                        }
+                                    }
+                                    &.text2{
+                                        p{
+                                            font-size: 1.25em;
+                                            @include desktop{
+                                                font-size: 1.125em;
+                                            }
+                                            @include tablet{
+                                                font-size: 1em;
+                                            }
+                                        }
+                                        i{
+                                            font-style: italic;
+                                        }
+                                    }
+                                }
+                                .img{
+                                    margin-top: 40px;
+                                    margin-bottom: 40px;
+                                    transition: all ease 0.5s;
+                                    @include desktop{
+                                        margin-top: 20px;
+                                    }
+                                    &:hover{
+                                        transform: scale(1.02);
+                                        transition: all ease 0.5s;
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .second{
+                    margin-top: 60px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    .block{
+                        position: relative;
+                        width: calc(50% - 20px);
+                        @include tablet{
+                            width: 100%;
+                        }
+                        &.block1{
+                            .background2{
+                                position: absolute;
+                                top: -2%;
+                                left: -2%;
+                                z-index: -1;
+                                opacity: 0.5;
+                                @include tablet{
+                                    top: -4%;
+                                    left: -3%;
+                                }
+                            }
+                        }
+                        &.block2{
+                            @include mobile{
+                                margin-top: 20px;
+                            }
+                        }
+                        .pic-zoom{
+                            transition: all ease 0.5s;
+                            &:hover{
+                                transform: scale(1.02);
+                                transition: all ease 0.5s;
+                                cursor: pointer;
+                            }
+                        }
+                        
+                    }
+                }
+                .last{
+                    margin-top: 40px;
+                    margin-bottom: 40px;
+                    padding-left: 40%;
+                    @include tablet{
+                        padding-left: 0;
+                    }
+                    .txt{
+                        font-size: 1.25em;
+                        @include desktop{
+                            font-size: 1.125em;
+                        }
+                        @include tablet{
+                            font-size: 1em;
+                        }
+                    }
+                }
+            }
+        }
+        .background3{
+            position: absolute;
+            width: 79.2%;
+            height: 40%;
+            right: 0;
+            bottom: 0;
+            transform: translate(0%, 34%);
+            z-index: -1;
+            background-color: #640202;
+            display: block;
+            content: "";
+            @include tablet{
+                display: none;
+            }
+            @include mobile{
+                display: block;
+            }
+        }
+    }
+    &.section4{
+        padding-bottom: 70px;
+        .desktop-md{
+            padding-bottom: 50px;
+            .wrap{
+                .video-block{
+                    position: relative;
+                    .icon{
+                        position: absolute;
+                        display: block;
+                        content: "";
+                        bottom: -7%;
+                        left: 3%;   
+                        width: 100px;
+                        z-index: 3;
+                    }
+                    .video-container{
+                        position: relative;
+                        padding-bottom: 40%;
+                        height: 0;
+                        .cover{
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            background: url("../images/28.png");
+                            background-size: cover;
+                            z-index:2;
+                            cursor: pointer;
+                            opacity: 1;
+                            .play-btn{
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(0, 0);
+                                width: 5%;
+                                transition: all ease 0.3s;
+                                &:hover{
+                                    transform: scale(1.2);
+                                    transition: all ease 0.3s;
+                                }
+                            }
+                        }
+                        .youtube-iframe{
+                            iframe{
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                z-index: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .desktop-sm{
+            .wrap{
+                .text{
+                    p{
+                        border: 1px solid white;
+                        padding: 10px 20px;
+                        margin-bottom: 20px;
+                        border-radius: 4px;
+                        font-size: 1.25em;
+                        @include desktop{
+                            font-size: 1.125em;
+                        }
+                        @include tablet{
+                            font-size: 1em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.section5{
+        position: relative;
+        padding-top: 10%;
+        padding-bottom: 5%;
+        @include mobile{
+            padding-bottom: 10%;
+        }
+        .background4{
+            position: absolute;
+            top: 25%;
+            left: 0;
+            width: 100%;
+            z-index: -1;
+            transform: translate(0%, -35%);
+        }
+        .item{
+            position: absolute;
+            z-index: -1;
+            &.item1{
+                top: 50%;
+                left: 0;
+                width: 10%;
+            }
+            &.item2{
+                top: 50%;
+                right: 0;
+                width: 15%;
+                z-index: -1;
+                transform: translate(0, -20%);
+                @include tablet{
+                    transform: translate(0, -75%);
+                }
+            }
+        }
+        .desktop-w{
+            font-size: 1.5em;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .desktop-md{
+            .wrap{
+                display: flex;
+                flex-wrap: wrap;
+                .block{
+                    width: 33%;
+                    padding: 0 2%;
+                    margin: 0 auto;
+                    margin-bottom: 5%;
+                    @include tablet{
+                        width: 50%;
+                        justify-content: center;
+                    }
+                    .icon{
+                        width: 80%;
+                        margin: 0 auto;
+                    }
+                    .count{
+                        font-weight: 300;
+                        color: #ffe306;
+                        font-size: 5em;
+                        letter-spacing: -15px;
+                        text-align: center;
+                        line-height: 1;
+                        margin-bottom: -15px;
+                        display: inline-block;
+                        position: relative;
+                        @include desktop{
+                            font-size: 4em;
+                        }
+                        @include laptop{
+                            font-size: 3.5em;
+                        }
+                        @include tablet{
+                            letter-spacing: -5px;
+                        }
+                        @include mobile{
+                            font-size: 1.5em;
+                        }
+                        &:before{
+                            width: 30px;
+                            height: 30px;
+                            display: block;
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            background: url("../images/plus.png") center no-repeat;
+                            background-size: 100%;
+                            transform: translate(-100%, -50%);
+                            @include mobile{
+                                width: 15px;
+                                height: 15px;
+                            }
+                        }
+                    }
+                    .text{
+                        @include tablet{
+                            font-size: 1em;
+                        }
+                        @include mobile{
+                            font-size: 1em;
+                        }
+                    }
+                }
+            }
+        }
+        .upper{
+            padding-bottom: 4%;
+            .wrap{
+                display: flex;
+                flex-wrap: wrap;
+                .block{
+                    width: calc(50% - 10px);
+                    padding: 0 5%;
+                    margin: 0 auto;
+                    @include mobile{
+                        padding: 0;
+                    }
+                    .numbers    {
+                        width: 30%;
+                        margin: 0 auto;
+                    }
+                    .text{
+                        width: 49%;
+                        margin: 0 auto;
+                        @include tablet{
+                            font-size: 1em;
+                            width: 100%;
+                        }
+                        @include mobile{
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+        .lower{
+            .wrap{
+                display: flex;
+                flex-wrap: wrap;
+                .block{
+                    width: 50%;
+                    @include tablet{
+                        width: 100%;
+                    }
+                    .text{
+                        background-color: #f9e1c3;
+                        padding: 16% 14% 10%;
+                        text-align: left;
+                        color: #af0303;
+                        position: relative;
+                        @include desktop{
+                            padding: 12% 9% 10%;
+                            padding-bottom: 5%;
+                        }
+                        @include tablet{
+                            padding: 4% 2% 0%;
+                        }
+                        @include mobile{
+                            padding: 25px 35px 0 15px;
+                        }
+                        &:before{
+                            display: block;
+                            content: "";
+                            position: absolute;
+                            width: 150px;
+                            height: 150px;
+                            top: 0;
+                            left: 0;
+                            transform: translate(-30%, -50%);
+                            background: url("../images/29.png") center no-repeat;
+                            background-size: 100%;
+                            @include tablet{
+                                width: 8vh;
+                                height: 8vh;
+                            }
+                        }
+                        p{
+                            margin: 0 0 30px 0;
+                            @include tablet{
+                                font-size: 1em;
+                            }
+                            @include mobile{
+                                font-size: 16px;
+                            }
+                        }
+                        h4{
+                            font-size: 2em;
+                            position: relative;
+                            color: #ed1c24;
+                            font-weight: 300;
+                            @include tablet{
+                                font-size: 1.8em;
+                            }
+                            @include mobile{
+                                font-size: 24px;
+                            }
+                            &:before{
+                                display: block;
+                                content: "";
+                                position: absolute;
+                                width: 50px;
+                                height: 3px;
+                                background-color: #af0303;
+                            }
+                        }
+                    }
+                    &.block1{
+                        padding: 0% 6%;
+                        @include tablet{
+                            padding: 0;
+                            margin-bottom: 20px;
+                        }
+                        .text{
+                            border-radius: 0 0 0 65px;
+                            @include mobile{
+                                border-radius: 0 0 0 35px;
+                            }
+                        }
+                    }
+                    &.block2{
+                        padding: 8% 3%;
+                        @include tablet{
+                            padding: 0;
+                        }
+                        .text{
+                            border-radius: 0 65px 0 0;
+                            @include mobile{
+                                border-radius: 0 35px 0 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.section6{
+        padding-bottom: 70px;
+        .desktop-w{
+            .wrap{
+                .text{
+                    font-size: 1.375em;
+                    text-align: center;
+                    @include desktop{
+                        font-size: 1.25em;
+                    }
+                    @include tablet{
+                        font-size: 1em;
+                    }
+                }
+                .popUp{
+                    padding-top: 80px;
+                    padding-bottom: 30px;
+                    display: flex;
+                    justify-content: center;
+                    span{
+                        font-size: 1.375em;
+                        color: #ffe306;
+                        display: inline-block;
+                        width: 20%;
+                        text-align: center;
+                        position: relative;
+                        @include tablet{
+                            width: 30%;
+                        }
+                        @include tablet{
+                            width: 70%;
+                            font-size: 1em;
+                        }
+                        &:before{
+                            display: block;
+                            content: "";
+                            background: url("../images/10.png") center no-repeat;
+                            background-size: 100%;
+                            position: absolute;
+                            top: -50%;
+                            left: 15%;
+                            width: 30px;
+                            height: 30px;
+                            background-size: 100%;
+                            transform: translate(0%, -50%);
+                        }
+                        animation: inAndOut 3s infinite;
+                    }
+                }
+                .wishes{
+                    display: flex;
+                    flex-wrap: wrap;
+                    @include tablet{
+                        justify-content: center;
+                    }
+                    .item{
+                        width: 33%;
+                        padding: 0 1%;
+                        transform: translate(0%, 0%);
+                        opacity: 1;
+                        transition: all ease 0.3s;
+                        cursor: pointer;
+                        @include tablet{
+                            width: 50%;
+                            padding: 20px 40px;
+                        }
+                        @include mobile{
+                            width: 100%;
+                        }
+                        &:hover{
+                            margin-top: -1%;
+                            transition: all ease 0.3s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.section7{
+        padding: 3% 0;
+        background-color: #f9e1c3;
+        @include desktop{
+            padding: 60px 0;
+        }
+        .desktop-md{
+            .wrap{
+                display: flex;
+                flex-wrap: wrap;
+                .block{
+                    width: 33%;
+                    padding: 0 4%;
+                    @include laptop{
+                        padding: 0 1%;
+                    }
+                    @include tablet{
+                        width: 100%;
+                    }
+                    .img{
+                        padding: 0 15%;
+                        position: relative;
+                        z-index: 2;
+                        @include tablet{
+                            padding: 0 20%;
+                        }
+                    }
+                    .text{
+                        text-align: center;
+                        font-size: 1.38em;
+                        color: #af0303;
+                        margin-top: 10%;
+                        font-weight: 300;
+                        position: relative;
+                        z-index: 1;
+                        @include desktop{
+                            font-size: 1.25em;
+                        }
+                        @include tablet{
+                            margin: 10px 0;
+                        }
+                        p.celeb-name{
+                            color: black;
+                            padding-top: 20px;
+                        }
+                        &:before{
+                            display: block;
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            background: url("../images/29.png") center no-repeat;
+                            background-size: 100%;
+                            z-index: -1;
+                            width: 150px;
+                            height: 150px;
+                            opacity: 0.5;
+                            transform: translate(20%, -70%);
+                            @include desktop{
+                                transform: translate(20%, -40%);
+                            }
+                            @include laptop{
+                                transform: translate(35%, -23%);
+                            }
+                            @include tablet{
+                                transform: translate(100%, -50%);
+                            }
+                            @include mobile{
+                                transform: translate(55%, -25%);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.section8{
+        padding: 3% 0;
+        .desktop-w{
+            .wrap{
+                display: flex;
+                flex-wrap: wrap;
+                background-color: #8d0202;
+                border-radius: 10px;
+                position: relative;
+                @include tablet{
+                    flex-direction: column-reverse;
+                }
+                &:before{
+                    display: block;
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform:translate(-50%, -50%);
+                    width: calc(100% - 30px);
+                    height: calc(100% - 30px);
+                    border: 3px solid #af0303;
+                    border-radius: 10px;
+                    z-index: 0;
+                }
+                .text{
+                    width: 60%;
+                    padding: 7% 2% 7% 5%;
+                    @include tablet{
+                        width: 100%;
+                        padding: 20px 30px;
+                    }
+                    p{
+                        font-size: 1.375em;
+                        @include desktop{
+                            font-size: 1.25em;
+                        }
+                        @include tablet{
+                            font-size: 1.125em;
+                        }
+                        span{
+                            color: #ffe306;
+                        }
+                    }
+                }
+                .images{
+                    width: 40%;
+                    position: relative;
+                    @include tablet{
+                        width: 100%;
+                    }
+                    .img{
+                        position: absolute;
+                        @include tablet{
+                            position: unset;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.author{
+        padding: 3% 0;
+        .desktop-w{
+            .item{
+                text-align: center;
+                font-size: 2em;
+                @include tablet{
+                    font-size: 1em;
+                }
+                span{
+                    color: #ffe306;
+                    text-shadow: 4px 4px 3px black;
+                }
+            }
+        }
+    }
 }
