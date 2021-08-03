@@ -1,5 +1,4 @@
 @import "reset";
-@import "jquery.fancybox.min.scss";
 @font-face {
     font-family: 'UTM';
     src: url('../fonts/UTMFlavour.woff2') format('woff2'),
@@ -170,12 +169,12 @@ body{
 section{
     &.banner{
         position: relative;
-        height: 100vh;
+        min-height: 120vh;
         display: flex;
         justify-content: center;
         align-items: center;
         margin-bottom: 10%;
-        overflow-x: hidden;
+        overflow: hidden;
         @include tablet{
             margin-bottom: 0;
         }
@@ -185,6 +184,14 @@ section{
                 width: 30%;
                 top: 0;
                 left: 0;
+                opacity: 0;
+                transform: translateX(-200px);
+                transition: all ease 1s;
+                transition-delay: 0.5s;
+                &.animate{
+                    opacity: 1;
+                    transform: translateX(0px);
+                }
                 @include laptop{
                     width: 40%;
                 }
@@ -205,6 +212,11 @@ section{
                 left: 0%;
                 bottom: 0%;
                 z-index: 1;
+                opacity: 0;
+                transition: all ease 1s;
+                &.animate{
+                    opacity: 1;
+                }
                 img{
                     -webkit-animation: opacity ease infinite 3s;
                     animation: opacity ease infinite 3s;
@@ -219,14 +231,19 @@ section{
             width: 80%;
         }
         .wrap{
-            position: relative;    
+            position: relative;
+            top: 300px;
+            opacity: 0;
+            transition: all ease 0.5s;
+            &.animate{
+                opacity: 1;
+                top: 0;
+            }    
             .bg{
                 position: absolute;
                 top: 50%;
                 left: 40%;
                 transform: translate(-50%, -50%);
-                -ms-transform: translate(-50%, -50%);
-                -o-transform: translate(-50%, -50%);
                 width: 115%;
                 z-index: -1;
                 @include laptop{
@@ -285,6 +302,17 @@ section{
         position: relative;
         .wrap{
             position: relative;
+            h2{
+                position: relative;
+                top: 100px;
+                opacity: 0;
+                transition: all ease 1s;
+                &.animate{
+                    top: 0;
+                    opacity: 1;
+                }
+            }
+
         }
         .title{
             @include sizeAndColor(2.625em, #ffe306);
@@ -314,7 +342,9 @@ section{
                 top: 50%;
             }
             .list{
-                opacity: 1;
+                opacity: 0;
+                transform: translateY(100px);
+                transition: all ease 0.5s;
                 display: flex;
                 flex-wrap: wrap;
                 -ms-flex-wrap: wrap;
@@ -323,6 +353,10 @@ section{
                 justify-content: space-between;
                 overflow: hidden;
                 padding: 4% 5% 4%;
+                &.animate{
+                    opacity: 1;
+                    transform: translateY(0);
+                }
                 @include mobile{
                     overflow: unset;
                 }
@@ -357,6 +391,14 @@ section{
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            position: relative;
+            top: 200px;
+            opacity: 0;
+            transition: all ease 1s;
+            &.animate{
+                top: 0;
+                opacity: 1;
+            }
             @include tablet{
                 font-size: 1em;
             }
@@ -388,6 +430,14 @@ section{
                 width: 5%;
                 right: 5%;
                 bottom: 2%;
+                transform: translateY(100px);
+                opacity: 0;
+                transition: ease 1s;
+                transition-delay: 1s;
+                &.animate{
+                    transform: translateY(0);
+                    opacity: 1;
+                }
             }
         }
     }
@@ -400,16 +450,28 @@ section{
             &.item1{
                 width: 10%;
                 top: 0;
-                left: 0;
+                left: 100px;
+                opacity: 0;
                 transform:translate(0, 40%);
+                transition: ease 0.5s;
+                &.animate{
+                    left: 0;
+                    opacity: 1;
+                }
             }
             &.item2{
                 width: 15%;
                 bottom: 0;
-                left: 0;
+                left: 100px;
+                opacity: 0;
                 transform: translate(0%, 30%);
+                transition: ease 0.5s;
                 @include tablet{
                     width: 40%;
+                }
+                &.animate{
+                    left: 0;
+                    opacity: 1;
                 }
             }
             &.item3{
@@ -428,6 +490,15 @@ section{
             .wrap{
                 h3{
                     @include sizeAndColor(2.625em, #ffe306);
+                    position: relative;
+                    left: 100px;
+                    opacity: 0;
+                    transition: ease 0.5s;
+                    transition-delay: 0.5s;
+                    &.animate{
+                        left: 0;
+                        opacity: 1;
+                    }
                     @include desktop{
                         font-size: 2.5em;
                     }
@@ -447,6 +518,14 @@ section{
                     display: flex;
                     flex-wrap: wrap;
                     justify-content: space-between;
+                    position: relative;
+                    opacity: 0;
+                    top: 150px;
+                    transition: ease 1s;
+                    &.animate{
+                        opacity: 1;
+                        top: 0;
+                    }
                     .quote{
                         width: calc(50% - 20px);
                         margin-bottom: 50px;
@@ -580,10 +659,12 @@ section{
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 0;
+            opacity: 0;
             height: 750px;
             background: #f9e1c3;
             z-index: -1;
+            transition: ease 1s;
             @include laptop{
                 height: 550px;
             }
@@ -593,13 +674,20 @@ section{
             @include mobile{
                 height: 925px;
             }
+            &.animate{
+                width: 100%;
+                opacity: 1;
+            }
         }
         .apricot{
             position: absolute;
             width: 25%;
             top: 0;
-            left: 0;
+            left: -100px;
+            opacity: 0;
             transform: translate(0, 80%);
+            transition: ease 0.5s;
+            transition-delay: 0.5s;
             @include desktop{
                 transform: translate(0, 130%);
             }
@@ -609,6 +697,10 @@ section{
             @include mobile{
                 transform: translate(0, 210%);
                 width: 30%;
+            }
+            &.animate{
+                left: 0;
+                opacity: 1;
             }
         }
         .desktop-md{
@@ -636,10 +728,17 @@ section{
                                 }
                                 .img{
                                     transition: all ease 0.5s;
+                                    opacity: 0;
+                                    left: -100px;
+                                    position: relative;
                                     &:hover{
                                         transform: scale(1.02);
                                         transition: all ease 0.5s;
                                         cursor: pointer;
+                                    }
+                                    &.animate{
+                                        left: 0;
+                                        opacity: 1;
                                     }
                                 }
                             }
@@ -647,6 +746,11 @@ section{
                                 width: calc(65% - 5px);
                                 padding-left: 5%;
                                 padding-top: 5%;
+                                position: relative;
+                                opacity: 0;
+                                top: 100px;
+                                transition-delay: 1s;
+                                transition: ease 0.5s;
                                 @include laptop{                             
                                     padding-left: 10%;
                                 }
@@ -654,8 +758,21 @@ section{
                                     width: 100%;
                                     padding: 0;
                                 }
+                                &.animate{
+                                    opacity: 1;
+                                    top: 0;
+                                }
                                 .text{
+                                    position: relative;
+                                    opacity: 0;
+                                    top: 100px;
+                                    transition: ease 1s;
                                     &.text1{
+                                        transition-delay: 1s;
+                                        &.animate{
+                                            top: 0;
+                                            opacity: 1;
+                                        }
                                         h3{
                                             @include sizeAndColor(2.625em, #ed1c24);
                                             text-shadow: 0 0 0 yellow;
@@ -671,6 +788,11 @@ section{
                                         }
                                     }
                                     &.text2{
+                                        transition-delay: 1s;
+                                        &.animate{
+                                            top: 0;
+                                            opacity: 1;
+                                        }
                                         p{
                                             font-size: 1.25em;
                                             @include desktop{
@@ -707,6 +829,14 @@ section{
                     display: flex;
                     flex-wrap: wrap;
                     justify-content: space-between;
+                    position: relative;
+                    top: 150px;
+                    opacity: 0;
+                    transition: ease 1s;
+                    &.animate{
+                        top: 0;
+                        opacity: 1;
+                    }
                     .block{
                         position: relative;
                         width: calc(50% - 20px);
@@ -750,12 +880,20 @@ section{
                         padding-left: 0;
                     }
                     .txt{
+                        position: relative;
+                        top: 100px;
+                        opacity: 0;
+                        transition: ease 1s;
                         font-size: 1.25em;
                         @include desktop{
                             font-size: 1.125em;
                         }
                         @include tablet{
                             font-size: 1em;
+                        }
+                        &.animate{
+                            top: 0;
+                            opacity: 1;
                         }
                     }
                 }
@@ -787,6 +925,13 @@ section{
             .wrap{
                 .video-block{
                     position: relative;
+                    top: 100px;
+                    opacity: 0;
+                    transition: ease 1s;
+                    &.animate{
+                        opacity: 1;
+                        top: 0;
+                    }
                     .icon{
                         position: absolute;
                         display: block;
@@ -841,6 +986,15 @@ section{
         .desktop-sm{
             .wrap{
                 .text{
+                    position: relative;
+                    top: 100px;
+                    opacity: 0;
+                    transition: ease 1s;
+                    transition-delay: 0.5s;
+                    &.animate{
+                        opacity: 1;
+                        top: 0;
+                    }
                     p{
                         border: 1px solid white;
                         padding: 10px 20px;
@@ -880,15 +1034,30 @@ section{
                 top: 50%;
                 left: 0;
                 width: 10%;
+                transform: translateX(100px);
+                opacity: 0;
+                transition: ease 1s;
+                transition-delay: 0.25s;
+                &.animate{
+                    opacity: 1;
+                    transform: translateX(0);
+                }
             }
             &.item2{
                 top: 50%;
                 right: 0;
                 width: 15%;
                 z-index: -1;
-                transform: translate(0, -20%);
+                transform: translate(0, 0%);
+                opacity: 0;
+                transition: ease 1s;
+                transition-delay: 0.5s;
                 @include tablet{
                     transform: translate(0, -75%);
+                }
+                &.animate{
+                    opacity: 1;
+                    transform: translate(0, -20%);
                 }
             }
         }
@@ -1000,8 +1169,16 @@ section{
                 flex-wrap: wrap;
                 .block{
                     width: 50%;
+                    position: relative;
+                    opacity: 0;
+                    top: 150px;
+                    transition: ease 1s;
                     @include tablet{
                         width: 100%;
+                    }
+                    &.animate{
+                        opacity: 1;
+                        top: 0;
                     }
                     .text{
                         background-color: #f9e1c3;
@@ -1101,11 +1278,20 @@ section{
                 .text{
                     font-size: 1.375em;
                     text-align: center;
+                    position: relative;
+                    top: 100px;
+                    opacity: 0;
+                    transition: ease 1s;
+
                     @include desktop{
                         font-size: 1.25em;
                     }
                     @include tablet{
                         font-size: 1em;
+                    }
+                    &.animate{
+                        opacity: 1;
+                        top: 0;
                     }
                 }
                 .popUp{
@@ -1113,6 +1299,15 @@ section{
                     padding-bottom: 30px;
                     display: flex;
                     justify-content: center;
+                    position: relative;
+                    top: 100px;
+                    opacity: 0;
+                    transition: ease 1s;
+                    transition-delay: 0.5s;
+                    &.animate{
+                        top: 0;
+                        opacity: 1;
+                    }
                     span{
                         font-size: 1.375em;
                         color: #ffe306;
@@ -1146,8 +1341,17 @@ section{
                 .wishes{
                     display: flex;
                     flex-wrap: wrap;
+                    position: relative;
+                    top: 100px;
+                    opacity: 0;
+                    transition: ease 1s;
+                    transition-delay: 1s;
                     @include tablet{
                         justify-content: center;
+                    }
+                    &.animate{
+                        top: 0;
+                        opacity: 1;
                     }
                     .item{
                         width: 33%;
@@ -1185,12 +1389,27 @@ section{
                 .block{
                     width: 33%;
                     padding: 0 4%;
+                    position: relative;
+                    top: 100px;
+                    opacity: 0;
+                    transition: ease 1s;
                     @include laptop{
                         padding: 0 1%;
                     }
                     @include tablet{
                         width: 100%;
                     }
+                    &.animate{
+                        top: 0;
+                        opacity: 1;
+                    }
+                    &.block2{
+                        transition-delay: 0.25s;
+                    }
+                    &.block3{   
+                        transition-delay: 0.5s;
+                    }
+
                     .img{
                         padding: 0 15%;
                         position: relative;
@@ -1257,8 +1476,15 @@ section{
                 background-color: #8d0202;
                 border-radius: 10px;
                 position: relative;
+                top: -100px;
+                opacity: 0;
+                transition: ease 1s;
                 @include tablet{
                     flex-direction: column-reverse;
+                }
+                &.animate{
+                    top: 0;
+                    opacity: 1;
                 }
                 &:before{
                     display: block;
@@ -1315,12 +1541,28 @@ section{
             .item{
                 text-align: center;
                 font-size: 2em;
+                position: relative;
+                top: 50px;
+                opacity: 0;
+                transition: ease 1s;
                 @include tablet{
                     font-size: 1em;
+                }
+                &.animate{
+                    opacity: 1;
+                    top: 0;
                 }
                 span{
                     color: #ffe306;
                     text-shadow: 4px 4px 3px black;
+                    display: inline-block;
+                    position: relative;
+                    transition: ease 0.5s;
+                    top: 0;
+                    &:hover{
+                        top: -5px;
+                        transition: ease 0.3s;
+                    }
                 }
             }
         }

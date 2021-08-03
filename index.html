@@ -12,6 +12,7 @@
     <meta name="keywords" content="500.000 lời chúc hóa hành động, gieo an lành cho năm mới">
     <title>500.000 lời chúc</title>
     
+    <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <script src = "assets/js/jquery.js"></script>
     <script src = "assets/js/jquery-countto.js"></script>
@@ -24,8 +25,8 @@
 <body>
 <div class = "container scrollContent">
     <div class = "page-content">
-        <section class = "banner">
-            <div class = "icon icon1" style = "transform: translate(0px, 0px); opacity: 1;">
+        <section class = "banner" id = "banner">
+            <div class = "icon icon1">
                 <img src="assets/images/1.png" alt="Apricot Blossom">
             </div>
             <div class = "icon icon2">
@@ -42,11 +43,11 @@
             </div>
             <div class = "desktop-w desktop-sm">
                 <div class = "wrap">
-                    <div class = "bg" style = "opacity: 1;">
+                    <div class = "bg">
                         <img src="assets/images/5.png" alt="Banner background">
                     </div>
-                    <div class = "pic" style = "opacity: 1;">
-                        <div class = "pic-zoom" id = "pic-zoom" href = "assets/images/2.png" data-fancybox = "images" data-caption = "#1" style ="transform: translate(0px, 0px); opacity: 1;">
+                    <div class = "pic">
+                        <div class = "pic-zoom" id = "pic-zoom" href = "assets/images/2.png" data-fancybox = "images" data-caption = "#1">
                             <img src="assets/images/2.png" alt="banner picture">
                         </div>
                     </div>
@@ -214,7 +215,7 @@
                                     <h3 class = "title ibr">Khi “lời chúc hóa hành động”</h3>
                                     <p>Cổ vũ mọi người trao lời chúc kèm hành động, cụ thể là trồng rừng để tạo ra sự đổi thay tích cực cho cuộc sống, OMO triển khai chiến dịch “Lời chúc hóa hành động - Lấm bẩn mang điều hay” với nhiều hoạt động thú vị.</p>
                                 </div>
-                                <div class = "img" href = "assets/images/21.png" data-fancybox="images" data-caption="#2" style = "opacity: 1;">
+                                <div class = "img" href = "assets/images/21.png" data-fancybox="images" data-caption="#2">
                                     <img src="assets/images/21.png" alt="suboi-va-cau-nhoc">
                                 </div>
                             </div>
@@ -223,7 +224,7 @@
                                     <h3 class = "ibr">Khi “lời chúc hóa hành động”</h3>
                                     <p>Cổ vũ mọi người trao lời chúc kèm hành động, cụ thể là trồng rừng để tạo ra sự đổi thay tích cực cho cuộc sống, OMO triển khai chiến dịch “Lời chúc hóa hành động - Lấm bẩn mang điều hay” với nhiều hoạt động thú vị.</p>
                                 </div>
-                                <div class = "img" href = "assets/images/22.png" data-fancybox="images" data-caption="#3" style = "opacity: 1;">
+                                <div class = "img" href = "assets/images/22.png" data-fancybox="images" data-caption="#3">
                                     <img src="assets/images/22.png" alt="suboi va rhymastic">
                                 </div>
                                 <div class = "text text2">
@@ -423,7 +424,7 @@
                             <p class = "celeb-name">- Quân A.P -</p>
                         </div>
                     </div>
-                    <div class = "block block1">
+                    <div class = "block block2">
                         <div class = "img">
                             <img src="assets/images/39.png" alt="Minh-Du">
                         </div>
@@ -432,7 +433,7 @@
                             <p class = "celeb-name">- Minh Dự -</p>
                         </div>
                     </div>
-                    <div class = "block block1">
+                    <div class = "block block3">
                         <div class = "img">
                             <img src="assets/images/40.png" alt="Chi-ca-no">
                         </div>
@@ -479,11 +480,12 @@
     var player;
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-            height: '390',
-            width: '640',
-            videoId: 'M7lc1UVf-VE',
+            height: '600px',
+            width: '100%',
+            videoId: '6AvpUbnDbv0',
             playerVars: {
-            'playsinline': 1
+            'playsinline': 1,
+            'autoplay': 0
             },
             events: {
             'onReady': onPlayerReady,
@@ -503,7 +505,6 @@
     var done = false;
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING && !done) {
-            setTimeout(stopVideo, 6000);
             $('.cover').hide();
             done = true;
         }
@@ -521,21 +522,6 @@
         player.playVideo();
         $('.cover').hide();
     });
-    //Scroll Magic
-
-    //Init Scroll magic
-    var scrollController = new ScrollMagic.Controller;
-
-    new ScrollMagic.Scene({
-									triggerElement: "#section1",
-									triggerHook: 0.9, // show, when scrolled 10% into view
-									duration: "80%", // hide 10% before exiting view (80% + 10% from bottom)
-									offset: 50 // move trigger to center of element
-								})
-								.setClassToggle("#reveal", "visible") // add class to reveal
-								.addIndicators() // add indicators (requires plugin)
-								.addTo(scrollController);
-
 </script>
 </body>
 </html>
